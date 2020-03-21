@@ -1,0 +1,57 @@
+<DOCTYPE! html>
+<html>
+<head>
+</head>
+    <body>
+<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-database.js"></script>
+<script>
+    
+  var firebaseConfig = {
+    apiKey: "AIzaSyAbkg3eRG3zd-vUzn8VEGmc_pYGL5Ly28c",
+    authDomain: "hjemmeoppgave-it1.firebaseapp.com",
+    databaseURL: "https://hjemmeoppgave-it1.firebaseio.com/",
+    projectId: "hjemmeoppgave-it1",
+    storageBucket: "hjemmeoppgave-it1.appspot.com",
+    messagingSenderId: "452487256188",
+    appId: "1:452487256188:web:04c1f4034f87188ae951f9"
+  };
+  firebase.initializeApp(firebaseConfig);
+    
+    let db = firebase.database();
+    
+    let bibliotek = db.ref("Bibliotek");
+    
+    function submit_data(){
+    var tittel_in = document.getElementById("tittel").value;
+        var utgivelse_in = document.getElementById("utgivelsesår").value;
+        var forfatter_in = document.getElementById("forfatter").value;
+        var forlag_in = document.getElementById("forlag").value;
+        var vurdering_in = document.getElementById("vurdering").value;
+        
+        let new_object = bibliotek.child("Bøker");
+        new_object.push(
+        {
+            Tittel : tittel_in,
+            Utgivelsesår : utgivelse_in,
+            Forfatter : forfatter_in,
+            Forlag : forlag_in,
+            Vurdering : vurdering_in,
+        }
+        );
+       
+        
+            window.alert("Beskjed lagt til i database");
+        }
+</script>
+        <p><strong>Tittel:</strong><input id="tittel" type="text" placeholder="Tittel"></p>
+        <p><strong>Utgivelsesår:</strong><input id="utgivelsesår" type="date" placeholder="Utgivelsesår"></p>
+        <p><strong>Forfatter:</strong><input id="forfatter" type="text" placeholder="Forfatter"></p>
+        <p><strong>Forlag:</strong><input id="forlag" type="text" placeholder="Forlag"></p>
+        <p><strong>Min vurdering:</strong><input id="vurdering" type="number" min="1" max="6" placeholder="1-6" title="Min vurdering"></p>
+        <input submit type="submit" onclick="submit_data()" value="Send Inn!">
+        
+        </body>
+    </html>
+</DOCTYPE!>
